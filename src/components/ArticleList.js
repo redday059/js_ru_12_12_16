@@ -1,20 +1,26 @@
+//noinspection JSUnresolvedVariable
 import React, {PropTypes} from 'react'
 import Article from './Article'
 import Chart from './Chart'
 
 export default class ArticleList extends React.Component {
+    static propTypes = {
+        articles: PropTypes.array.isRequired
+    };
+
     state = {
         openArticleId: null
-    }
+    };
+
     render() {
-        const {articles} = this.props
+        const {articles} = this.props;
         const articleElements = articles.map(article =>
             <li key={article.id}>
                 <Article article={article}
                          isOpen={this.state.openArticleId == article.id}
                          onClick={this.toggleOpenArticle(article.id)}
                 />
-            </li>)
+            </li>);
         return (
             <div>
                 <h2>Article List</h2>
@@ -32,8 +38,4 @@ export default class ArticleList extends React.Component {
             openArticleId: id
         })
     }
-}
-
-ArticleList.propTypes = {
-    articles: PropTypes.array.isRequired
 }

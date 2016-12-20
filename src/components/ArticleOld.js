@@ -9,7 +9,7 @@ export default React.createClass({
     },
 
     render() {
-        const { article } = this.props
+        const { article } = this.props;
         return (
             <div>
                 <h3 onClick = {this.toggleOpen}>{article.title}</h3>
@@ -18,7 +18,7 @@ export default React.createClass({
         )
     },
     getBody() {
-        if (!this.state.isOpen) return null
+        if (!this.state.isOpen) return null;
         return (
             <section>
                 {this.props.article.text}
