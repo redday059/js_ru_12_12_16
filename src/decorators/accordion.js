@@ -12,7 +12,7 @@ export default function accordion(Component) {
 
         accordion(id) {
             this.setState({
-                openArticleId: id
+                openArticleId: id !== this.state.openArticleId ? id : null
             })
         }
 
