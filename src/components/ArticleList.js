@@ -10,12 +10,13 @@ class ArticleList extends React.Component {
     };
 
     render() {
-        const {articles, accordion, openArticleId} = this.props;
+        const {articles, toggleItem, isItemOpen} = this.props;
+        console.log('this.props ', this.props);
         const articleElements = articles.map(article =>
             <li key={article.id}>
                 <Article article={article}
-                         isOpen={openArticleId == article.id}
-                         onClick={()=>accordion(article.id)}
+                         isOpen={isItemOpen(article.id)}
+                         onClick={toggleItem(article.id)}
                 />
             </li>);
         return (

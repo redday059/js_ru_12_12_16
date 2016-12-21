@@ -4,18 +4,18 @@ import React from 'react'
 export default function accordion(Component) {
     return class WrapperComponent extends React.Component {
         state = {
-            openArticleId: null
+            openItemId: null
         };
+
         render() {
-            return <Component {...this.props} {...this.state} accordion = {(id)=>this.accordion(id)}/>
+            return <Component {...this.props} toggleItem = {this.toggleItem} isItemOpen = {this.isItemOpen}/>
         }
 
-        accordion(id) {
-            this.setState({
-                openArticleId: id !== this.state.openArticleId ? id : null
-            })
-        }
+        toggleItem = id => ev => this.setState({
+            openItemId: !this.isItemOpen(id) ? id : null
+        });
 
+        isItemOpen = id => this.state.openItemId == id;
     }
 }
 
