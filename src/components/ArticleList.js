@@ -1,18 +1,17 @@
 import React, {PropTypes} from 'react'
+import {findDOMNode} from 'react-dom'
 import Article from './Article'
-import Chart from './Chart'
+import accordion from '../decorators/accordion'
 
-export default class ArticleList extends React.Component {
-    state = {
-        openArticleId: null
-    }
+class ArticleList extends React.Component {
     render() {
-        const {articles} = this.props
+        const {articles, isOpenItem, toggleOpenItem} = this.props
         const articleElements = articles.map(article =>
             <li key={article.id}>
                 <Article article={article}
-                         isOpen={this.state.openArticleId == article.id}
-                         onClick={this.toggleOpenArticle(article.id)}
+                         isOpen={isOpenItem(article.id)}
+                         onClick={toggleOpenItem(article.id)}
+                         ref = {this.getArticleRef}
                 />
             </li>)
         return (
@@ -22,18 +21,20 @@ export default class ArticleList extends React.Component {
                     {/*some comment*/}
                     {articleElements}
                 </ul>
-                <Chart articles={articles}/>
             </div>
         )
     }
 
-    toggleOpenArticle = id => ev => {
-        this.setState({
-            openArticleId: id
-        })
+    getArticleRef = (article) => {
+        this.article = article
+        console.log('---', findDOMNode(article))
     }
 }
 
 ArticleList.propTypes = {
-    articles: PropTypes.array.isRequired
+    articles: PropTypes.array.isRequired,
+    isOpenItem: PropTypes.func.isRequired,
+    toggleOpenItem: PropTypes.func.isRequired
 }
+
+export default accordion(ArticleList)
