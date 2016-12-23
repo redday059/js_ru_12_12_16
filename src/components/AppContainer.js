@@ -10,10 +10,11 @@ function AppContainer(props) {
             <Filter articles = {props.articles}/>
             <ArticleList articles={props.articles}/>
         </div>
-    )
+    );
 }
 
 AppContainer.propTypes = {
-}
+    articles: PropTypes.array.isRequired
+};
 
-export default AppContainer
+export default AppContainer;

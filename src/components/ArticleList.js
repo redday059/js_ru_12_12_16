@@ -1,11 +1,11 @@
 import React, {PropTypes} from 'react'
 import {findDOMNode} from 'react-dom'
-import Article from './Article'
+import Article from './Article/index'
 import accordion from '../decorators/accordion'
 
 class ArticleList extends React.Component {
     render() {
-        const {articles, isOpenItem, toggleOpenItem} = this.props
+        const {articles, isOpenItem, toggleOpenItem} = this.props;
         const articleElements = articles.map(article =>
             <li key={article.id}>
                 <Article article={article}
@@ -13,7 +13,7 @@ class ArticleList extends React.Component {
                          onClick={toggleOpenItem(article.id)}
                          ref = {this.getArticleRef}
                 />
-            </li>)
+            </li>);
         return (
             <div>
                 <h2>Article List</h2>
@@ -26,7 +26,7 @@ class ArticleList extends React.Component {
     }
 
     getArticleRef = (article) => {
-        this.article = article
+        this.article = article;
         console.log('---', findDOMNode(article))
     }
 }
@@ -35,6 +35,6 @@ ArticleList.propTypes = {
     articles: PropTypes.array.isRequired,
     isOpenItem: PropTypes.func.isRequired,
     toggleOpenItem: PropTypes.func.isRequired
-}
+};
 
-export default accordion(ArticleList)
+export default accordion(ArticleList);
