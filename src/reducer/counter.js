@@ -1,7 +1,7 @@
 import { INCREMENT } from '../constants'
 
 export default (state = 0, action) => {
-    const { type } = action
+    const { type } = action;
 
     switch (type) {
         case INCREMENT:

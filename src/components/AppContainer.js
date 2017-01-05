@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import ArticleList from './ArticleList'
 import UserForm from './UserForm'
-import Filter from './Filters'
+import Filters from './Filters'
 import Counter from './Counter'
 
 function AppContainer(props) {
@@ -9,7 +9,7 @@ function AppContainer(props) {
         <div>
             <Counter/>
             <UserForm />
-            <Filter articles = {[]}/>
+            <Filters articles = {[]}/>
             <ArticleList/>
         </div>
     )

@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 class ArticleList extends React.Component {
     render() {
-        const {articles, isOpenItem, toggleOpenItem} = this.props
+        const {articles, isOpenItem, toggleOpenItem} = this.props;
         const articleElements = articles.map(article =>
             <li key={article.id}>
                 <Article article={article}
@@ -14,7 +14,7 @@ class ArticleList extends React.Component {
                          onClick={toggleOpenItem(article.id)}
                          ref = {this.getArticleRef}
                 />
-            </li>)
+            </li>);
         return (
             <div>
                 <h2>Article List</h2>
@@ -27,8 +27,8 @@ class ArticleList extends React.Component {
     }
 
     getArticleRef = (article) => {
-        this.article = article
-        console.log('---', findDOMNode(article))
+        this.article = article;
+        console.log('---', findDOMNode(article));
     }
 }
 
@@ -36,12 +36,16 @@ ArticleList.propTypes = {
     articles: PropTypes.array.isRequired,
     isOpenItem: PropTypes.func.isRequired,
     toggleOpenItem: PropTypes.func.isRequired
-}
+};
 
-export default connect(
-    (state) => {
-        return {
-            articles: state.articles
-        }
+export default connect(state => {
+    const { articles, filters: { selected, dateRange: { from, to } } } = state;
+    const filteredArticles = articles.filter(article => {
+        const articleDate = Date.parse(article.date);
+        return (!selected.length || selected.includes(article.id)) &&
+            (!from || !to || (articleDate > from && articleDate < to))
+    });
+    return {
+        articles: filteredArticles
     }
-)(accordion(ArticleList))
+})(accordion(ArticleList))
