@@ -1,12 +1,16 @@
 import { DELETE_ARTICLE } from '../constants'
 import { normalizedArticles } from '../fixtures'
+import { arrayToMap } from './helpers'
 
-export default (articlesState = normalizedArticles, action) => {
+const defaultState = arrayToMap(normalizedArticles)
+export default (articlesState = defaultState, action) => {
     const { type, payload } = action
 
     switch (type) {
         case DELETE_ARTICLE:
-            return articlesState.filter(article => article.id !== payload.id)
+            let afterDeleting = Object.assign({}, articlesState);
+            delete afterDeleting[payload.id];
+            return afterDeleting
     }
 
     return articlesState

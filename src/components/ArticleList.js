@@ -3,6 +3,7 @@ import {findDOMNode} from 'react-dom'
 import Article from './Article'
 import accordion from '../decorators/accordion'
 import { connect } from 'react-redux'
+import { mapToArray } from '../reducer/helpers'
 
 class ArticleList extends React.Component {
     render() {
@@ -40,9 +41,10 @@ ArticleList.propTypes = {
 
 export default connect(
     (state) => {
-        const { articles, filters } = state
-        const {selected} = filters
+        const { filters } = state
+        const { selected } = filters
         const { from, to } = filters.dateRange
+        const articles = mapToArray(state.articles);
 
         const filteredArticles = articles.filter(article => {
             const published = Date.parse(article.date)

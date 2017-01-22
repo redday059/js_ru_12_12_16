@@ -50,8 +50,9 @@ class CommentList extends Component {
 export default connect(
     (state, props) => {
         const { comments } = state;
+        console.log('YYY', comments);
         const { commentsIDs} = props;
         return {
-            comments: comments.filter((comment) => commentsIDs.includes(comment.id))
+            comments: commentsIDs.map(id => comments[id])
         }
 })(toggleOpen(CommentList))
