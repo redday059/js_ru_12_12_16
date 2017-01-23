@@ -3,7 +3,7 @@ import {findDOMNode} from 'react-dom'
 import Article from './Article'
 import accordion from '../decorators/accordion'
 import { connect } from 'react-redux'
-import { mapToArray } from '../reducer/helpers'
+import { mapToArray } from '../helpers'
 
 class ArticleList extends React.Component {
     render() {

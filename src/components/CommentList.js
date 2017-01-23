@@ -2,16 +2,15 @@ import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 import NewCommentForm from './NewCommentForm'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import { addComment }from '../AC/index'
 
 class CommentList extends Component {
     static propTypes = {
+        article: PropTypes.object,
         comments: PropTypes.array,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
-    }
-    static defaultProps = {
-        commentsIDs: []
     }
 
     render() {
@@ -31,9 +30,9 @@ class CommentList extends Component {
 
     getBody() {
         console.log('ttttt' ,this.props)
-        const { comments, isOpen } = this.props
+        const { comments, article, isOpen, addComment } = this.props
         if (!isOpen) return null
-        const form = <NewCommentForm addComment={(comment) => console.log(comment)} />
+        const form = <NewCommentForm addComment = {(comment) => addComment(article.id, comment)} />
         if (!comments.length) return <div><p>No comments yet</p>{form}</div>
 
         const commentItems = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)
@@ -50,9 +49,8 @@ class CommentList extends Component {
 export default connect(
     (state, props) => {
         const { comments } = state;
-        console.log('YYY', comments);
-        const { commentsIDs} = props;
+        const { article} = props;
         return {
-            comments: commentsIDs.map(id => comments[id])
+            comments: article.comments.map(id => comments.get(id))
         }
-})(toggleOpen(CommentList))
+}, { addComment})(toggleOpen(CommentList))
