@@ -1,23 +1,33 @@
 import { ADD_COMMENT } from '../constants'
 import { normalizedComments } from '../fixtures'
 import { arrayToMap } from '../helpers'
-import { Record } from 'immutable'
+import { Record }from 'immutable'
 
 const CommentModel = Record({
-    id: null,
-    text: null,
-    user: null
+    'id': null,
+    'user': null,
+    'text': null
 })
 
-const defaultState = arrayToMap(normalizedComments, CommentModel)
+const defaultState = arrayToMap(normalizedComments, CommentModel);
 
-export default (state = defaultState, action) => {
+export default (commentsState = defaultState, action) => {
     const { type, payload, randomId } = action
-
     switch (type) {
         case ADD_COMMENT:
-            return state.set(randomId, new CommentModel({...payload.comment, id: randomId}))
+            console.log("P A Y L O A D: ", payload)
+            const { user, text } = payload;
+            return commentsState.set(randomId,CommentModel({
+                ...payload.comment, 'id': randomId,
+
+            }))
+            // return commentsState.set(randomId,CommentModel({
+            //     'id': randomId,
+            //     'user': payload.comment.user,
+            //     'text': payload.comment.text
+            // }))
     }
 
-    return state
+    return commentsState
+
 }
