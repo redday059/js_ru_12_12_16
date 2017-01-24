@@ -12,10 +12,6 @@ class ArticleList extends React.Component {
         this.props.loadAllArticles()
     }
 
-    componentWillReceiveProps() {
-
-    }
-
     render() {
         const {articles, loading, isOpenItem, toggleOpenItem} = this.props
         const articleElements = articles.map(article =>

@@ -1,4 +1,4 @@
-import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, SUCCESS, START, FAIL } from '../constants'
+import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, SUCCESS, START, FAIL } from '../constants'
 // убираем import { normalizedArticles } from '../fixtures'
 import { arrayToMap } from '../helpers'
 import { Record, OrderedMap }from 'immutable'
@@ -42,6 +42,10 @@ export default (articlesState = new DefaultReducerState({}), action) => {
             return articlesState
                 .set('error', error)
                 .set('loading', false);
+        case LOAD_ARTICLE + SUCCESS:
+            console.log('AAA: ',action)
+            return articlesState.setIn(['entities', payload.id], new ArticleModel(response))
+            //return articlesState.setIn(['entities', payload.id, 'text'], response.text)
     }
     return articlesState
 }

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import CommentList from '../CommentList'
 import CSSTransition from 'react-addons-css-transition-group'
-import { deleteArticle } from '../../AC'
+import { deleteArticle, loadArticleById } from '../../AC'
 import { connect } from 'react-redux'
 import './style.css'
 
@@ -10,6 +10,13 @@ class Article extends Component {
         article: PropTypes.object.isRequired,
         isOpen: PropTypes.bool,
         onClick: PropTypes.func
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('$ $ $ $ $ ', this.props)
+        if (!this.props.isOpen && nextProps.isOpen) {
+            nextProps.loadArticleById(this.props.article.id)
+        }
     }
 
     componentDidMount() {
@@ -59,4 +66,4 @@ class Article extends Component {
     }
 }
 
-export default connect(null, { deleteArticle })(Article)
+export default connect(null, { deleteArticle, loadArticleById })(Article)
