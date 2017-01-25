@@ -3,6 +3,7 @@ import CommentList from '../CommentList'
 import CSSTransition from 'react-addons-css-transition-group'
 import { deleteArticle, loadArticleById } from '../../AC'
 import { connect } from 'react-redux'
+import Loader  from '../Loader/Loader'
 import './style.css'
 
 class Article extends Component {
@@ -13,26 +14,16 @@ class Article extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('$ $ $ $ $ ', this.props)
         if (!this.props.isOpen && nextProps.isOpen) {
             nextProps.loadArticleById(this.props.article.id)
         }
     }
 
-    componentDidMount() {
-//        console.log('---', this.refs.container)
-    }
-    /*
-     shouldComponentUpdate(nextProps, nextState) {
-     return this.props.isOpen != nextProps.isOpen
-     }
-     */
-
-    componentWillUpdate() {
-    }
-
     render() {
-        const { article, onClick } = this.props
+        const { article, onClick } = this.props;
+        const loading = article.loading
+        //console.log('77777777777777: ', this.props, ' loading: ', loading)
+        const loader = loading && <Loader />
         return (
             <div ref = "container">
                 <h3 onClick = {onClick}>{article.title}</h3>
@@ -45,6 +36,7 @@ class Article extends Component {
                     transitionLeaveTimeout={300}
                 >
                     {this.getBody()}
+                    {loader}
                 </CSSTransition>
             </div>
         )

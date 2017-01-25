@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 function Loader() {
     return (
-        <div>
+        <div className="loader">
             <h2>Loading...</h2>
         </div>
     )

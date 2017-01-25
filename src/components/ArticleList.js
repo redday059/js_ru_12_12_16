@@ -5,7 +5,7 @@ import accordion from '../decorators/accordion'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
 import { loadAllArticles } from '../AC'
-import Loader from './Loader'
+import Loader from './Loader/Loader'
 
 class ArticleList extends React.Component {
     componentDidMount() {

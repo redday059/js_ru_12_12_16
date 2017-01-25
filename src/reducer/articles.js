@@ -1,4 +1,4 @@
-import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, SUCCESS, START, FAIL } from '../constants'
+import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, SUCCESS, START, FAIL } from '../constants'
 // убираем import { normalizedArticles } from '../fixtures'
 import { arrayToMap } from '../helpers'
 import { Record, OrderedMap }from 'immutable'
@@ -8,7 +8,10 @@ const ArticleModel = Record({
     'date': null,
     'title': null,
     'text': null,
-    'comments':[]
+    'comments':[],
+    'loading': false,
+    'loadingComments': false,
+    'loadedComments': false
 })
 
 const DefaultReducerState = Record({
@@ -42,10 +45,20 @@ export default (articlesState = new DefaultReducerState({}), action) => {
             return articlesState
                 .set('error', error)
                 .set('loading', false);
+        case LOAD_ARTICLE + START:
+            return articlesState.setIn(['entities', payload.id, 'loading'], true)
         case LOAD_ARTICLE + SUCCESS:
-            console.log('AAA: ',action)
+            //console.log('AAA: ',action)
             return articlesState.setIn(['entities', payload.id], new ArticleModel(response))
+                                .setIn(['entities', payload.id, 'loading'], false)
             //return articlesState.setIn(['entities', payload.id, 'text'], response.text)
+        case LOAD_ARTICLE_COMMENTS + START:
+            return articlesState
+                .setIn(['entities', payload.id, 'loadingComments'], true)
+        case LOAD_ARTICLE_COMMENTS + SUCCESS:
+            return articlesState
+                .setIn(['entities', payload.id, 'loadingComments'], false)
+                .setIn(['entities', payload.id, 'loadedComments'], true)
     }
     return articlesState
 }

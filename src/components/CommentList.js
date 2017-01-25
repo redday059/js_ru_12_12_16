@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import {addComment} from '../AC'
+import {addComment, loadArticleComments} from '../AC'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 import NewCommentForm from './NewCommentForm'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import Loader  from './Loader/Loader'
+import './Loader/style.css'
 
 
 class CommentList extends Component {
@@ -12,6 +14,17 @@ class CommentList extends Component {
         comments: PropTypes.array,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('******** nextProps: ', nextProps);
+        console.log('nextProps ..  ', nextProps.article.loadedComments)
+        // instead of checking if comments have been loaded in the line below,
+        // we check it in AC loadArticleComments(id).
+        // if (!this.props.isOpen && nextProps.isOpen && !nextProps.article.loadedComments && !nextProps.article.loadingComments) {
+        if (!this.props.isOpen && nextProps.isOpen){
+            nextProps.loadArticleComments(this.props.article.id)
+        }
     }
 
     render() {
@@ -31,13 +44,16 @@ class CommentList extends Component {
 
     getBody() {
 
-        console.log('ttttt' ,this.props)
         const { comments, article, isOpen, addComment } = this.props
         if (!isOpen) return null
+        if (article.loadingComments || !article.loadedComments) return <Loader />
         const form = <NewCommentForm addComment = {(comment) => addComment(article.id, comment)} />
         if (!comments.length) return <div><p>No comments yet</p>{form}</div>
 
-        const commentItems = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)
+        const commentItems = comments.map(comment => {
+            return <li key = {comment.id}><Comment comment = {comment} /></li>
+        })
+
 
         return (
             <div>
@@ -50,9 +66,11 @@ class CommentList extends Component {
 
 export default connect(
     (state, props) => {
-        const { comments } = state;
-        const { article} = props;
+        // console.log('STATE: ', state);
+        console.log('PROPS: ', props);
+        // const { comments } = state;
+        // const { article} = props;
         return {
-            comments: article.comments.map(id => comments.get(id))
+            comments: props.article.comments.map(id => state.comments.getIn(['entities', id]))
         }
-}, { addComment})(toggleOpen(CommentList))
+}, { loadArticleComments, addComment})(toggleOpen(CommentList))
