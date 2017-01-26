@@ -8,22 +8,26 @@ import './style.css'
 
 class Article extends Component {
     static propTypes = {
-        article: PropTypes.object.isRequired,
+        id: PropTypes.string.isRequired,
+        // from connect:
+        article: PropTypes.object,
         isOpen: PropTypes.bool,
         onClick: PropTypes.func
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.isOpen && nextProps.isOpen) {
-            nextProps.loadArticleById(this.props.article.id)
+    componentDidMount(){
+        //console.log('this')
+        if (this.props.isOpen) {
+            console.log('!!!!!!!!!', this.props.id)
+            this.props.loadArticleById(this.props.id)
         }
     }
 
     render() {
         const { article, onClick } = this.props;
         const loading = article.loading
-        //console.log('77777777777777: ', this.props, ' loading: ', loading)
         const loader = loading && <Loader />
+        if(!article) return null
         return (
             <div ref = "container">
                 <h3 onClick = {onClick}>{article.title}</h3>
@@ -58,4 +62,9 @@ class Article extends Component {
     }
 }
 
-export default connect(null, { deleteArticle, loadArticleById })(Article)
+export default connect(
+    (state, props) => {
+        return {
+            article: state.articles.getIn(['entities', props.id])
+        }
+    }, { deleteArticle, loadArticleById })(Article)

@@ -29,32 +29,39 @@ export default (articlesState = new DefaultReducerState({}), action) => {
     switch (type) {
         case DELETE_ARTICLE:
             return articlesState.deleteIn(['entities', payload.id])
+
         case ADD_COMMENT:
             return articlesState.updateIn(['entities', payload.articleId, 'comments'], val => val.concat(randomId))
+
         case LOAD_ALL_ARTICLES + START:
             return articlesState.set('loading', true)
-        case LOAD_ALL_ARTICLES + SUCCESS:
-            console.log('action ? ', action)
 
+        case LOAD_ALL_ARTICLES + SUCCESS:
             return articlesState
-                .mergeIn(['entities'], arrayToMap(response, ArticleModel))
+                //.mergeIn(['entities'], arrayToMap(response, ArticleModel))
+                .update('entities', entities => arrayToMap(response, ArticleModel).merge(entities))
                 .set('loading', false)
                 .set('loaded', true)
                 .set('error', false);
+
         case LOAD_ALL_ARTICLES + FAIL:
             return articlesState
                 .set('error', error)
                 .set('loading', false);
+
         case LOAD_ARTICLE + START:
             return articlesState.setIn(['entities', payload.id, 'loading'], true)
+
         case LOAD_ARTICLE + SUCCESS:
             //console.log('AAA: ',action)
             return articlesState.setIn(['entities', payload.id], new ArticleModel(response))
                                 .setIn(['entities', payload.id, 'loading'], false)
             //return articlesState.setIn(['entities', payload.id, 'text'], response.text)
+
         case LOAD_ARTICLE_COMMENTS + START:
             return articlesState
                 .setIn(['entities', payload.id, 'loadingComments'], true)
+
         case LOAD_ARTICLE_COMMENTS + SUCCESS:
             return articlesState
                 .setIn(['entities', payload.id, 'loadingComments'], false)

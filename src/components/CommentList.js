@@ -17,8 +17,8 @@ class CommentList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('******** nextProps: ', nextProps);
-        console.log('nextProps ..  ', nextProps.article.loadedComments)
+        // console.log('******** nextProps: ', nextProps);
+        // console.log('nextProps ..  ', nextProps.article.loadedComments)
         // instead of checking if comments have been loaded in the line below,
         // we check it in AC loadArticleComments(id).
         // if (!this.props.isOpen && nextProps.isOpen && !nextProps.article.loadedComments && !nextProps.article.loadingComments) {
@@ -66,10 +66,6 @@ class CommentList extends Component {
 
 export default connect(
     (state, props) => {
-        // console.log('STATE: ', state);
-        console.log('PROPS: ', props);
-        // const { comments } = state;
-        // const { article} = props;
         return {
             comments: props.article.comments.map(id => state.comments.getIn(['entities', id]))
         }
