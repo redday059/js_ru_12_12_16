@@ -68,6 +68,6 @@ class CommentList extends Component {
 export default connect(
     (state, props) => {
         return {
-            comments: props.article.comments.map(id => state.comments.getIn(['entities', id]))
+            comments: props.article.comments && props.article.comments.map(id => state.comments.getIn(['entities', id]))
         }
 }, { loadArticleComments, addComment})(toggleOpen(CommentList))

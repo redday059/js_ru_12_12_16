@@ -1,6 +1,7 @@
 import { INCREMENT, DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS,
     LOAD_COMMENTS_FOR_PAGE, START, SUCCESS, FAIL} from '../constants'
 import $ from 'jquery'
+import history from '../history'
 
 export function increment() {
     return {
@@ -39,6 +40,7 @@ export function loadArticleById(id) {
             payload: { id }
         });
 
+        // not for Prod
         setTimeout(() => {
             $.get('/api/article/' + id)
                 .done(response => dispatch({
@@ -46,12 +48,15 @@ export function loadArticleById(id) {
                     payload: { id },
                     response
                 }))
-                .fail(error => dispatch({
-                    type: LOAD_ARTICLE + FAIL,
-                    payload: { id },
-                    error
-                }))
-        } , 1000)
+                .fail(error => {
+                    dispatch({
+                        type: LOAD_ARTICLE + FAIL,
+                        payload: { id },
+                        error
+                    })
+                    history.replace(`/error?message=Article with id ${id} Not found`)
+                })
+        }, 2000)
     }
 }
 
@@ -65,6 +70,7 @@ export function loadArticleComments(id) {
             payload: { id }
         });
 
+        // not for Prod
         setTimeout(() => {
             $.get('/api/comment?article=' + id)
                 .done(response => dispatch({
@@ -77,7 +83,7 @@ export function loadArticleComments(id) {
                     payload: { id },
                     error
                 }))
-        } , 3000)
+        }, 3000)
     }
 }
 
@@ -88,6 +94,7 @@ export function loadCommentsForPage(page){
             type: LOAD_COMMENTS_FOR_PAGE + START
         });
 
+        // not for Prod
         setTimeout(() => {
             $.get(`/api/comment?limit=5&offset=${(page-1) * 5}`)
                 .done(response => dispatch({
@@ -99,6 +106,6 @@ export function loadCommentsForPage(page){
                     type: LOAD_COMMENTS_FOR_PAGE + FAIL,
                     error
                 }))
-        } , 2000)
+        }, 2000)
     }
 }

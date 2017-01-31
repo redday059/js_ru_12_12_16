@@ -14,7 +14,7 @@ class ArticleList extends React.Component {
 
     render() {
         const {articles, loading, isOpenItem, toggleOpenItem} = this.props
-        const articleElements = articles.map(article =>
+        const articleElements = articles.filter(article => article.id).map(article =>
             <li key={article.id}>
                 <Link to={`/articles/${article.id}`}>{article.title}</Link>
             </li>)

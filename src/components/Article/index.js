@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes} from 'react'
 import CommentList from '../CommentList'
 import CSSTransition from 'react-addons-css-transition-group'
 import { deleteArticle, loadArticleById } from '../../AC'
@@ -15,6 +15,11 @@ class Article extends Component {
         onClick: PropTypes.func
     }
 
+    static contextTypes = {
+        store: PropTypes.object,
+        router: PropTypes.object
+    }
+
     componentDidMount(){
         //console.log('this')
         if (this.props.isOpen) {
@@ -24,9 +29,12 @@ class Article extends Component {
     }
 
     render() {
+        console.log('------', this.context)
         const { article, onClick } = this.props;
-        const loading = article.loading
-        const loader = loading && <Loader />
+        //const loading = article.loading
+
+
+        const loader = article && article.loading && <Loader />
         if(!article) return null
         return (
             <div ref = "container">

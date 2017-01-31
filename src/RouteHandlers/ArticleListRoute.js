@@ -3,9 +3,11 @@ import ArticleList from '../components/ArticleList'
 
 class ArticleListRoute extends Component {
     render() {
+        console.log(this.props.children);
         return(
             <div>
                 <ArticleList />
+                {this.props.article}
                 {this.props.children}
             </div>
         )
