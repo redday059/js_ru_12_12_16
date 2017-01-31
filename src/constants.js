@@ -13,3 +13,4 @@ export const START = 'START'
 export const SUCCESS = 'SUCCESS'
 export const FAIL = 'FAIL'
 
+export const LOAD_COMMENTS_FOR_PAGE = 'LOAD_COMMENTS_FOR_PAGE'

@@ -3,7 +3,7 @@ import CommentList from '../CommentList'
 import CSSTransition from 'react-addons-css-transition-group'
 import { deleteArticle, loadArticleById } from '../../AC'
 import { connect } from 'react-redux'
-import Loader  from '../Loader/Loader'
+import Loader  from '../Loader/index'
 import './style.css'
 
 class Article extends Component {

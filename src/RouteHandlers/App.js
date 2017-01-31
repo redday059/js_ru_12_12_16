@@ -15,6 +15,7 @@ class App extends Component {
                         {/*<MenuItem path='/counter'/>*/}
                         <MenuItem path='/articles'/>
                         <MenuItem path='/filters'/>
+                        <MenuItem path='/comments'/>
                     </Menu>
                     {this.props.children}
                 </div>

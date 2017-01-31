@@ -4,7 +4,7 @@ import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 import NewCommentForm from './NewCommentForm'
 import { connect } from 'react-redux'
-import Loader  from './Loader/Loader'
+import Loader  from './Loader/index'
 import './Loader/style.css'
 
 
@@ -51,6 +51,7 @@ class CommentList extends Component {
         if (!comments.length) return <div><p>No comments yet</p>{form}</div>
 
         const commentItems = comments.map(comment => {
+            console.log('!!!   ',comment)
             return <li key = {comment.id}><Comment comment = {comment} /></li>
         })
 
