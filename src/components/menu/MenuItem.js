@@ -8,7 +8,7 @@ class MenuItem extends Component {
     };
 
     render() {
-        const { path, name } = this.props
+        const { path, name } = this.props;
         return (
             <li>
                 <Link to={path} activeStyle={{color: 'red'}} activeClassName="active">{name || path}</Link>

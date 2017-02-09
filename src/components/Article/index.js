@@ -4,6 +4,7 @@ import CSSTransition from 'react-addons-css-transition-group'
 import { deleteArticle, loadArticleById } from '../../AC'
 import { connect } from 'react-redux'
 import Loader  from '../Loader/index'
+import LocalizedText from '../LocalizedText'
 import './style.css'
 
 class Article extends Component {
@@ -13,40 +14,32 @@ class Article extends Component {
         article: PropTypes.object,
         isOpen: PropTypes.bool,
         onClick: PropTypes.func
-    }
+    };
 
     static contextTypes = {
         store: PropTypes.object,
         router: PropTypes.object
-    }
+    };
 
     componentDidMount(){
-        //console.log('this')
         if (this.props.isOpen) {
-            console.log('!!!!!!!!!', this.props.id)
             this.props.loadArticleById(this.props.id)
         }
     }
 
     render() {
-        console.log('------', this.context)
         const { article, onClick } = this.props;
-        //const loading = article.loading
-
-
-        const loader = article && article.loading && <Loader />
-        if(!article) return null
+        const loader = article && article.loading && <Loader />;
+        if(!article) return null;
         return (
             <div ref = "container">
-                <h3 onClick = {onClick}>{article.title}</h3>
-                <div>
-                    <a href="#" onClick = {this.handleDelete}>delete article</a>
-                </div>
                 <CSSTransition
                     transitionName="article-body"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={300}
                 >
+                    <h3 onClick = {onClick}>{article.title}</h3>
+                    {this.getDeleteButton()}
                     {this.getBody()}
                     {loader}
                 </CSSTransition>
@@ -55,7 +48,7 @@ class Article extends Component {
     }
 
     getBody() {
-        if (!this.props.isOpen) return null
+        if (!this.props.isOpen) return null;
         return (
             <section>
                 {this.props.article.text}
@@ -64,8 +57,15 @@ class Article extends Component {
         )
     }
 
+    getDeleteButton() {
+        if (this.props.article && !this.props.article.text) return null;
+        return (<div>
+            <a href="#" onClick = {this.handleDelete}><LocalizedText text="delete article"/></a>
+        </div>)
+    }
+
     handleDelete = ev => {
-        ev.preventDefault()
+        ev.preventDefault();
         this.props.deleteArticle(this.props.article.id)
     }
 }
@@ -75,4 +75,4 @@ export default connect(
         return {
             article: state.articles.getIn(['entities', props.id])
         }
-    }, { deleteArticle, loadArticleById })(Article)
+    }, { deleteArticle, loadArticleById }, null, {pure: false})(Article)

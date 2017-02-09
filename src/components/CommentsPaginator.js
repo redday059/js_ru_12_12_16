@@ -9,7 +9,6 @@ class CommentsPaginator extends Component {
 
     render() {
         const total = this.props.total
-        console.log('total: ', total)
         //if (!total) return null
         const links = Array(...Array(Math.ceil(total/5))).map((link, index) => {
             return (
@@ -18,8 +17,7 @@ class CommentsPaginator extends Component {
                         {index + 1}
                     </Link>
                 </li>
-        )})
-        console.log(links)
+        )});
         return (
             <ul>
                 {links}

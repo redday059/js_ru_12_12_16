@@ -12,29 +12,29 @@ const ArticleModel = Record({
     'loading': false,
     'loadingComments': false,
     'loadedComments': false
-})
+});
 
 const DefaultReducerState = Record({
     error: null,
     loading: false,
     loaded: false,
     entities: new OrderedMap({})
-})
+});
 
 //const defaultState = arrayToMap([], ArticleModel)
 
 export default (articlesState = new DefaultReducerState({}), action) => {
-    const { type, payload, randomId, response, error } = action
+    const { type, payload, randomId, response, error } = action;
 
     switch (type) {
         case DELETE_ARTICLE:
-            return articlesState.deleteIn(['entities', payload.id])
+            return articlesState.deleteIn(['entities', payload.id]);
 
         case ADD_COMMENT:
-            return articlesState.updateIn(['entities', payload.articleId, 'comments'], val => val.concat(randomId))
+            return articlesState.updateIn(['entities', payload.articleId, 'comments'], val => val.concat(randomId));
 
         case LOAD_ALL_ARTICLES + START:
-            return articlesState.set('loading', true)
+            return articlesState.set('loading', true);
 
         case LOAD_ALL_ARTICLES + SUCCESS:
             return articlesState
@@ -50,17 +50,15 @@ export default (articlesState = new DefaultReducerState({}), action) => {
                 .set('loading', false);
 
         case LOAD_ARTICLE + START:
-            return articlesState.setIn(['entities', payload.id, 'loading'], true)
+            return articlesState.setIn(['entities', payload.id, 'loading'], true);
 
         case LOAD_ARTICLE + SUCCESS:
-            //console.log('AAA: ',action)
             return articlesState.setIn(['entities', payload.id], new ArticleModel(response))
-                                .setIn(['entities', payload.id, 'loading'], false)
-            //return articlesState.setIn(['entities', payload.id, 'text'], response.text)
+                                .setIn(['entities', payload.id, 'loading'], false);
 
         case LOAD_ARTICLE_COMMENTS + START:
             return articlesState
-                .setIn(['entities', payload.id, 'loadingComments'], true)
+                .setIn(['entities', payload.id, 'loadingComments'], true);
 
         case LOAD_ARTICLE_COMMENTS + SUCCESS:
             return articlesState
