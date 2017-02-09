@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import { loadCommentsForPage } from '../AC'
 import Comment from './Comment'
-import Loader from'./Loader'
+import Loader from'./Loader/index'
 
 class CommentsPage extends Component {
 

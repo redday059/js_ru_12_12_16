@@ -5,7 +5,7 @@ import accordion from '../decorators/accordion'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
 import { loadAllArticles } from '../AC'
-import Loader from './Loader'
+import Loader from './Loader/index'
 import LocalizedText from './LocalizedText'
 
 class ArticleList extends React.Component {
@@ -58,4 +58,4 @@ export default connect(
             articles: filteredArticles,
             loading: state.articles.loading
         }
-    }, { loadAllArticles })(accordion(ArticleList))
+    }, { loadAllArticles }, null, {pure: false})(accordion(ArticleList))
