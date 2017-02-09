@@ -1,11 +1,12 @@
 import React, {PropTypes} from 'react'
 import {findDOMNode} from 'react-dom'
-import Article from './Article'
-import Loader from './Loader'
+import {Link} from 'react-router'
 import accordion from '../decorators/accordion'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
 import { loadAllArticles } from '../AC'
+import Loader from './Loader'
+import LocalizedText from './LocalizedText'
 
 class ArticleList extends React.Component {
     componentDidMount() {
@@ -14,18 +15,14 @@ class ArticleList extends React.Component {
 
     render() {
         const {articles, loading, isOpenItem, toggleOpenItem} = this.props
-        const articleElements = articles.map(article =>
+        const articleElements = articles.filter(article => article.id).map(article =>
             <li key={article.id}>
-                <Article article={article}
-                         isOpen={isOpenItem(article.id)}
-                         onClick={toggleOpenItem(article.id)}
-                         ref = {this.getArticleRef}
-                />
+                <Link to={`/articles/${article.id}`}>{article.title}</Link>
             </li>)
         const loader = loading && <Loader />
         return (
             <div>
-                <h2>Article List</h2>
+                <h2><LocalizedText text="Article List" /></h2>
                 <ul>
                     {/*some comment*/}
                     {articleElements}
@@ -44,24 +41,21 @@ ArticleList.propTypes = {
     articles: PropTypes.array.isRequired,
     isOpenItem: PropTypes.func.isRequired,
     toggleOpenItem: PropTypes.func.isRequired
-}
+};
 
 export default connect(
     (state) => {
-        const articles = mapToArray(state.articles.entities)
-        const { filters } = state
-        const {selected} = filters
-        const { from, to } = filters.dateRange
-
+        const articles = mapToArray(state.articles.entities);
+        const { filters } = state;
+        const { selected } = filters;
+        const { from, to } = filters.dateRange;
         const filteredArticles = articles.filter(article => {
-            const published = Date.parse(article.date)
+            const published = Date.parse(article.date);
             return (!selected.length || selected.includes(article.id)) &&
                 (!from || !to || (published > from && published < to))
-        })
+        });
         return {
             articles: filteredArticles,
             loading: state.articles.loading
         }
-    },
-    { loadAllArticles }
-)(accordion(ArticleList))
+    }, { loadAllArticles })(accordion(ArticleList))

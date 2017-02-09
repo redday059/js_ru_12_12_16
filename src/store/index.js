@@ -5,11 +5,13 @@ import randomId from '../middlewares/randomId'
 import api from '../middlewares/api'
 import thunk from 'redux-thunk'
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const enhancer = composeEnhancers(applyMiddleware(thunk, randomId, api, logger))
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducer, {}, enhancer)
+const enhancer = composeEnhancers(applyMiddleware(api, thunk, randomId, logger));
+
+const store = createStore(reducer, {}, enhancer);
+
 //not for prod
-window.store = store
+window.store = store;
 
 export default store

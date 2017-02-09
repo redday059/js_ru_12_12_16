@@ -6,7 +6,7 @@ const defaultFilters = {
         from: null,
         to: null
     }
-}
+};
 
 export default (filters = defaultFilters, action) => {
     const { type, payload } = action
