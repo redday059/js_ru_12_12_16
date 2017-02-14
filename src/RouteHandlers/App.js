@@ -29,19 +29,32 @@ class App extends Component {
         return(
             <Provider store = {store}>
                 <div>
-                    <Switcher items = {['nl', 'en']} onChange={this.changeLanguage} active={this.state.language}/>
-                    <h1><LocalizedText text="News App"/></h1>
-                    <div>
-                        <LocalizedText text="Input username"/>:
-                        <input type="text" value={this.state.username} onChange={this.handleChange}/>
+                    <div className="header">
+                        <div className="container">
+                            <div className="row">
+                                <Switcher items = {['nl', 'en']} onChange={this.changeLanguage} active={this.state.language}/>
+                                <h1 className="col-xs-20 pull-left title"><LocalizedText text="News App"/></h1>
+                            </div>
+                        </div>
                     </div>
-                    <Menu>
-                        {/*<MenuItem path='/counter'/>*/}
-                        <MenuItem path='/articles'/>
-                        <MenuItem path='/filters'/>
-                        <MenuItem path='/comments'/>
-                    </Menu>
-                    {this.props.children}
+                    <div className="container">
+                        <div className="row">
+                            <div className="user col-sm-12">
+                                <label htmlFor="user" className="user__label">
+                                    <LocalizedText text="Input username:"/>
+                                </label>
+                                <input type="text" id="user" className="user__label" value={this.state.username} onChange={this.handleChange}/>
+                            </div>
+                            <Menu>
+                                {/*<MenuItem path='/counter'/>*/}
+                                <MenuItem path='/articles'/>
+                                <MenuItem path='/filters'/>
+                                <MenuItem path='/comments'/>
+                            </Menu>
+
+                        </div>
+                        {this.props.children}
+                    </div>
                 </div>
             </Provider>
         )

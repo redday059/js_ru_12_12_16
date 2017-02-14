@@ -5,18 +5,19 @@ const activeStyle = {color: 'red'};
 function Switcher(props) {
     const menuItems = props.items.map(item => {
         return (
-            <li style = {item == props.active ? activeStyle : {}}
-                   key = {item}
-                   onClick = {handleClick(props.onChange, item)}
+            <span style = {item == props.active ? activeStyle : {}}
+                  key = {item}
+                  onClick = {handleClick(props.onChange, item)}
+                  className="language"
             >
                 {item}
-            </li>
+            </span>
         )});
 
     return (
-        <ul>
+        <div className="col-xs-4 pull-right switcher">
             {menuItems}
-        </ul>
+        </div>
     )
 }
 

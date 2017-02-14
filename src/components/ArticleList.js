@@ -21,7 +21,7 @@ class ArticleList extends React.Component {
             </li>)
         const loader = loading && <Loader />
         return (
-            <div>
+            <div className="container">
                 <h2><LocalizedText text="Article List" /></h2>
                 <ul>
                     {/*some comment*/}

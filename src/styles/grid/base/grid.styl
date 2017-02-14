@@ -1,0 +1,40 @@
+// Reset box sizing
+*
+  box-sizing border-box
+*:before,
+*:after
+  box-sizing border-box
+
+
+// Container widths
+.container
+  container-fixed()
+
+  @media (min-width $screen_sm)
+    width $container-sm
+  @media (min-width $screen_md)
+    width $container-md
+  @media (min-width $screen_lg)
+    width $container-lg
+
+// Row
+.row
+  make-row()
+
+// Columns
+make-grid-columns()
+
+// Extra small grid
+make-grid(xs)
+
+// Small grid
+@media (min-width $screen_sm)
+  make-grid(sm)
+
+// Medium grid
+@media (min-width $screen_md)
+  make-grid(md)
+
+// Large grid
+@media (min-width $screen_lg)
+  make-grid(lg)
