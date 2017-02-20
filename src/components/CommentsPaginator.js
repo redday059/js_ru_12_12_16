@@ -12,14 +12,15 @@ class CommentsPaginator extends Component {
         //if (!total) return null
         const links = Array(...Array(Math.ceil(total/5))).map((link, index) => {
             return (
-                <li key={index}>
-                    <Link to={`/comments/${index+1}`} activeStyle={{color: 'red'}} activeClassName="active">
+                <li key={index} className="pagination__page">
+                    <Link to={`/comments/${index+1}`} activeStyle={{color: 'red'}} className="pagination__link" activeClassName="pagination__link_active">
                         {index + 1}
                     </Link>
+                    {/*<span className="pagination__link pagination__link_disable">{index + 1}</span>*/}
                 </li>
         )});
         return (
-            <ul>
+            <ul className="pagination__list">
                 {links}
             </ul>
         );

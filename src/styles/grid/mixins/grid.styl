@@ -25,7 +25,8 @@ make-grid-columns()
 float-grid-columns($class)
   $col-float-{$class}
     float left
-  for $index in ..$grid_columns
+
+  for $index in 1..$grid_columns
     .col-{$class}-{$index}
       @extend $col-float-{$class}
 
@@ -61,3 +62,19 @@ make-grid($class)
   loop-grid-columns($grid_columns, $class, pull)
   loop-grid-columns($grid_columns, $class, push)
   loop-grid-columns($grid_columns, $class, offset)
+
+responsive-visibility()
+  display block !important
+
+  table&
+    display table !important
+
+  tr&
+    display table-row !important
+
+  th&,
+  td&
+    display table-cell !important
+
+responsive-invisibility()
+  display none !important

@@ -32,17 +32,19 @@ class Article extends Component {
         const loader = article && article.loading && <Loader />;
         if(!article) return null;
         return (
-            <div ref = "container">
-                <CSSTransition
-                    transitionName="article-body"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={300}
-                >
-                    <h3 onClick = {onClick}>{article.title}</h3>
+            <div ref = "container" className="article">
+                {/*<CSSTransition*/}
+                    {/*transitionName="article-body"*/}
+                    {/*transitionEnterTimeout={500}*/}
+                    {/*transitionLeaveTimeout={300}*/}
+                {/*>*/}
+                    <h3 onClick = {onClick} className="article__title">
+                        {article.title}
+                    </h3>
                     {this.getDeleteButton()}
                     {this.getBody()}
                     {loader}
-                </CSSTransition>
+                {/*</CSSTransition>*/}
             </div>
         )
     }
@@ -50,8 +52,10 @@ class Article extends Component {
     getBody() {
         if (!this.props.isOpen) return null;
         return (
-            <section>
-                {this.props.article.text}
+            <section className="article__body">
+                <div className="article__text">
+                    {this.props.article.text}
+                </div>
                 <CommentList article = {this.props.article} />
             </section>
         )
@@ -59,9 +63,16 @@ class Article extends Component {
 
     getDeleteButton() {
         if (this.props.article && !this.props.article.text) return null;
-        return (<div>
-            <a href="#" onClick = {this.handleDelete}><LocalizedText text="delete article"/></a>
-        </div>)
+        return (
+            <div className="clearfix">
+                <button className="btn article__delete-btn pull-right" onClick = {this.handleDelete}><LocalizedText text="delete article"/></button>
+            </div>
+        )
+
+        // return (<div>
+        //     <button className="article__delete-btn" onClick = {this.handleDelete}><LocalizedText text="delete article"/></button>
+        //     {/*<a href="#" onClick = {this.handleDelete}><LocalizedText text="delete article"/></a>*/}
+        // </div>)
     }
 
     handleDelete = ev => {

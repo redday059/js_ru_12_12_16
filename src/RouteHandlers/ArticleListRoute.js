@@ -5,7 +5,7 @@ class ArticleListRoute extends Component {
     render() {
         //console.log(this.props.children);
         return(
-            <div>
+            <div className="container">
                 <ArticleList />
                 {this.props.article}
                 {this.props.children}

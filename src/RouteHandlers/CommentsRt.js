@@ -5,10 +5,10 @@ class CommentRoot extends Component {
     render() {
         return (
             <div>
-                <h1>Comments pagination</h1>
-                <CommentsPaginator />
+                <div className="container">
+                    <CommentsPaginator />
+                </div>
                 {this.props.children}
-                <CommentsPaginator />
             </div>
         )
     }

@@ -21,8 +21,9 @@ class DateRange extends Component {
                     ref="daypicker"
                     selectedDays={ day => DateUtils.isDayInRange(day, { from, to }) }
                     onDayClick={ this.handleDayClick }
+                    numberOfMonths={3}
                 />
-                {selectedRange}
+                <div className="filters__selected-range"> {selectedRange} </div>
             </div>
         );
     }

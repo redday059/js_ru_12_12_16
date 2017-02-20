@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { loadCommentsForPage } from '../AC'
 import Comment from './Comment'
 import Loader from'./Loader/index'
+import CommentsPaginator from './CommentsPaginator'
 
 class CommentsPage extends Component {
 
@@ -19,15 +20,29 @@ class CommentsPage extends Component {
 
     render() {
         const { total, comments, page } = this.props
-        if (!total) return <Loader />
+        const loaderInContainer = (<div className="container">
+                <Loader />
+            </div>
+        );
+        if (!total) return loaderInContainer
         if ( (page - 1) * 5 >= total ) return <h3>No comments for this page</h3>
-        if (!comments || !comments.size) return <Loader />
+        if (!comments || !comments.size) return loaderInContainer
 
-        const commentItems = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)
+        const commentItems = comments.map(comment =>
+            <li key = {comment.id} className="comments__item">
+                <Comment comment = {comment} />
+            </li>
+        );
+
         return (
-            <ul>
-                {commentItems}
-            </ul>
+            <div className="container">
+                <div className="comments comments_root">
+                    <ul className="comments__list">
+                        {commentItems}
+                    </ul>
+                </div>
+                <CommentsPaginator/>
+            </div>
         )
     }
 }

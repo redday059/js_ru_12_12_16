@@ -5,7 +5,7 @@ import toggleOpen from '../decorators/toggleOpen'
 import NewCommentForm from './NewCommentForm'
 import { connect } from 'react-redux'
 import Loader  from './Loader/index'
-import './Loader/style.css'
+import './Loader/style.styl'
 import LocalizedText from './LocalizedText'
 
 
@@ -41,9 +41,13 @@ class CommentList extends Component {
 
     getLink() {
         if (this.props.article && !this.props.article.text) return null;
-        return <a href="#" onClick = {this.props.toggleOpen}>
-            {this.props.isOpen ? <LocalizedText text='hide comments' />  : <LocalizedText text='show comments' /> }
-        </a>
+        return (
+            <div className="clearfix">
+                <button className="btn article__comments-btn pull-right" href="#" onClick = {this.props.toggleOpen}>
+                    {this.props.isOpen ? <LocalizedText text='hide comments' />  : <LocalizedText text='show comments' /> }
+                </button>
+            </div>
+        )
     }
 
     getBody() {
@@ -55,13 +59,20 @@ class CommentList extends Component {
         if (!comments.length) return <div><p><LocalizedText text="No comments yet"/></p>{form}</div>;
 
         const commentItems = comments.map(comment => {
-            return <li key = {comment.id}><Comment comment = {comment} /></li>
+            return (<li key = {comment.id} className="comments__item">
+                        <Comment comment = {comment} />
+                    </li>
+            )
         });
 
         return (
-            <div>
-                <b>User from React context: {this.context.user}</b>
-                <ul>{commentItems}</ul>
+            <div className="comments">
+                <ul className="comments__list">{commentItems}</ul>
+                <div className="comments__context"> User from React context:
+                    <span className="comments__context-value">
+                        {this.context.user ? this.context.user: "not indicated"}
+                    </span>
+                </div>
                 {form}
             </div>
         )

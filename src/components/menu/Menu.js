@@ -8,9 +8,9 @@ class Menu extends Component {
 
     render() {
         return (
-            <div className="menu col-xs-24 col-md-12">
-                <h3><LocalizedText text=" Select path"/></h3>
-                <ul>
+            <div className="menu col-xs-24 col-sm-12 pull-left">
+                <div className="menu__text"><LocalizedText text=" Select path:"/></div>
+                <ul className="menu__list">
                     {this.props.children}
                 </ul>
             </div>

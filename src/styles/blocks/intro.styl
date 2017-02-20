@@ -1,0 +1,56 @@
+.intro
+  padding 10px 0
+
+.title
+  margin 0
+  line-height 120px
+
+.switcher
+  line-height 120px
+  text-align right
+
+.language
+  font-size 18px
+  vertical-align middle
+  padding-right 6px
+  @media (min-width $screen_sm)
+    padding-right 8px
+  @media (min-width $screen_md)
+    padding-right 10px
+
+.language:last-child
+  padding-right 0
+
+.user
+  font-size 18px
+  text-align left
+  margin-bottom 20px
+  @media (min-width $screen_sm)
+    text-align right
+    margin-bottom 10px
+  &__input
+    padding 0 6px
+
+  &__label
+    margin-right 6px
+
+.menu
+  font-size 18px
+  &__text
+    display inline-block
+    line-height normal
+    vertical-align top
+
+  &__list
+    list-style none
+    margin 0
+    display inline-block
+    line-height normal
+    vertical-align top
+
+  &__link
+    //TODO: to choose appropriate color
+
+  &__link_active
+    text-decoration none
+    cursor default

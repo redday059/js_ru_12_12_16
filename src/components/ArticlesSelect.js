@@ -14,13 +14,14 @@ class SelectFilter extends Component {
     handleChange = selected => this.props.changeSelection(selected.map(option => option.value))
 
     render() {
-        const { articles, selected } = this.props
+        const { articles, selected } = this.props;
         const options = articles.map(article => ({
             label: article.title,
             value: article.id
-        }))
+        }));
 
         return <Select
+            className="filters__select"
             options={options}
             value={selected}
             multi={true}

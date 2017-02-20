@@ -1,0 +1,28 @@
+.filters
+  margin-top 20px
+
+  &__select
+    margin-bottom 10px
+    @media (min-width $screen_sm)
+      margin-bottom 16px
+    @media (min-width $screen_md)
+      margin-bottom 20px
+
+  .DayPicker
+    margin-bottom 10px
+
+  .DayPicker-Month
+    display none
+
+    &:nth-child(2)
+      display table
+
+    @media (min-width $screen_sm)
+      &:nth-child(3)
+        display table
+    @media (min-width $screen_md)
+      &:nth-child(4)
+        display table
+
+  &__selected-range
+    text-align center

@@ -3,8 +3,12 @@ import React, { PropTypes }  from 'react'
 function Comment(props) {
     const { comment: { text, user } } = props
     return (
-        <div>
-            {text} <b>{user}</b>
+        <div className="comments__inner-wrap">
+            <div className="comments__user">
+                <div className="comments__avatar"></div>
+                <div className="comments__name">{user}</div>
+            </div>
+            <div className="comments__text">{text}</div>
         </div>
     )
 }

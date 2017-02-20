@@ -14,17 +14,23 @@ class ArticleList extends React.Component {
     }
 
     render() {
-        const {articles, loading, isOpenItem, toggleOpenItem} = this.props
+        const {articles, loading, isOpenItem, toggleOpenItem} = this.props;
         const articleElements = articles.filter(article => article.id).map(article =>
-            <li key={article.id}>
-                <Link to={`/articles/${article.id}`}>{article.title}</Link>
-            </li>)
-        const loader = loading && <Loader />
+            <li key={article.id} className="article-list__article col-xs-24 col-sm-8 col-md-4 blue">
+                <Link to={`/articles/${article.id}`}
+                      className="article-list__link"
+                      activeStyle={{color: 'red'}}
+                      activeClassName="article-list__link_active">{article.title}
+                </Link>
+                <div className="article-list__link-wrapper">
+                    <div className="article-list__link-text">{article.title}</div>
+                </div>
+            </li>);
+        const loader = loading && <Loader />;
         return (
-            <div className="container">
+            <div>
                 <h2><LocalizedText text="Article List" /></h2>
-                <ul>
-                    {/*some comment*/}
+                <ul className="row article-list">
                     {articleElements}
                 </ul>
                 {loader}

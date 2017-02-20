@@ -6,6 +6,7 @@ import MenuItem from '../components/menu/MenuItem'
 import dictionaries from '../dictionaries'
 import LocalizedText from '../components/LocalizedText'
 import Switcher from '../components/Switcher'
+import Footer from '../components/Footer'
 
 class App extends Component {
     state = {
@@ -38,12 +39,12 @@ class App extends Component {
                         </div>
                     </div>
                     <div className="container">
-                        <div className="row">
-                            <div className="user col-sm-12">
+                        <div className="row intro">
+                            <div className="user col-xs-24 col-sm-12 pull-right">
                                 <label htmlFor="user" className="user__label">
                                     <LocalizedText text="Input username:"/>
                                 </label>
-                                <input type="text" id="user" className="user__label" value={this.state.username} onChange={this.handleChange}/>
+                                <input type="text" id="user" className="user__input" value={this.state.username} onChange={this.handleChange}/>
                             </div>
                             <Menu>
                                 {/*<MenuItem path='/counter'/>*/}
@@ -53,8 +54,9 @@ class App extends Component {
                             </Menu>
 
                         </div>
-                        {this.props.children}
                     </div>
+                    {this.props.children}
+                    <Footer/>
                 </div>
             </Provider>
         )
