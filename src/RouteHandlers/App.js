@@ -8,6 +8,10 @@ import LocalizedText from '../components/LocalizedText'
 import Switcher from '../components/Switcher'
 import Footer from '../components/Footer'
 
+
+console.log('DEVELOPMENT: ', DEVELOPMENT.toString());
+console.log('PRODUCTION: ', PRODUCTION.toString());
+
 class App extends Component {
     state = {
         username: '',

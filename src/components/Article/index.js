@@ -5,7 +5,7 @@ import { deleteArticle, loadArticleById } from '../../AC'
 import { connect } from 'react-redux'
 import Loader  from '../Loader/index'
 import LocalizedText from '../LocalizedText'
-import './style.css'
+//import './style.css'
 
 class Article extends Component {
     static propTypes = {
