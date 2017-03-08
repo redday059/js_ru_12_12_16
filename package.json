@@ -1,5 +1,5 @@
 {
-  "name": "react_course_23_09_21_30",
+  "name": "getting-to-know-react",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/romabelka/js_ru_23_09_21_30"
+    "url": "git+https://github.com/redday059/js_ru_12_12_16"
   },
-  "author": "",
+  "author": "redday059",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/romabelka/js_ru_23_09_21_30"
+    "url": "https://github.com/redday059/js_ru_12_12_16"
   },
-  "homepage": "https://github.com/romabelka/js_ru_23_09_21_30",
+  "homepage": "https://github.com/redday059/js_ru_12_12_16",
   "devDependencies": {
     "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",
