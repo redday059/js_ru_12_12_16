@@ -14,3 +14,4 @@ export const SUCCESS = 'SUCCESS'
 export const FAIL = 'FAIL'
 
 export const LOAD_COMMENTS_FOR_PAGE = 'LOAD_COMMENTS_FOR_PAGE'
+export const URL = PRODUCTION ? 'http://app-c3466245-e685-444c-b34c-7c57a1d12a1a.cleverapps.io':''

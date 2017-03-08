@@ -9,7 +9,7 @@ var PRODUCTION = process.env.NODE_ENV === 'production';
 
 var plugins = PRODUCTION
     ?   [
-            new webpack.optimize.UglifyJsPlugin(),
+            new webpack.optimize.UglifyJsPlugin({ sourceMap: false }),
             new ExtractTextPlugin('style.css'),
             new HTMLWebpackPlugin({
                 template: 'index-template.html'
@@ -37,13 +37,12 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'build'),
         filename: 'bundle.js',
-        //publicPath: '/'
-        publicPath: PRODUCTION ? '' : '/static/'
+        publicPath: 'static/'
     },
     devServer: {
         proxy: [{
             path: '/api/',
-            target: 'http://localhost:3001'
+            target: PRODUCTION ? '' :'http://localhost:3001'
         }],
         historyApiFallback: true
     },

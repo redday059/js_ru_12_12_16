@@ -21,7 +21,7 @@ const DefaultReducerState = Record({
     entities: new OrderedMap({})
 });
 
-//const defaultState = arrayToMap([], ArticleModel)
+// const defaultState = arrayToMap([], ArticleModel)
 
 export default (articlesState = new DefaultReducerState({}), action) => {
     const { type, payload, randomId, response, error } = action;

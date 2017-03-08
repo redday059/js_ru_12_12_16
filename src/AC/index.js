@@ -1,5 +1,5 @@
 import { INCREMENT, DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS,
-    LOAD_COMMENTS_FOR_PAGE, START, SUCCESS, FAIL} from '../constants'
+    LOAD_COMMENTS_FOR_PAGE, START, SUCCESS, FAIL, URL} from '../constants'
 import $ from 'jquery'
 import history from '../history'
 
@@ -27,7 +27,7 @@ export function addComment(articleId, comment) {
 export function loadAllArticles() {
     return {
         type: LOAD_ALL_ARTICLES,
-        callAPI: '/api/article'
+        callAPI: URL + '/api/article'
     }
 }
 
@@ -42,7 +42,7 @@ export function loadArticleById(id) {
 
         // not for Prod
         setTimeout(() => {
-            $.get('/api/article/' + id)
+            $.get(URL + '/api/article/' + id)
                 .done(response => dispatch({
                     type: LOAD_ARTICLE + SUCCESS,
                     payload: { id },
@@ -72,7 +72,7 @@ export function loadArticleComments(id) {
 
         // not for Prod
         setTimeout(() => {
-            $.get('/api/comment?article=' + id)
+            $.get(URL + '/api/comment?article=' + id)
                 .done(response => dispatch({
                     type: LOAD_ARTICLE_COMMENTS + SUCCESS,
                     payload: {id},
@@ -96,7 +96,7 @@ export function loadCommentsForPage(page){
 
         // not for Prod
         setTimeout(() => {
-            $.get(`/api/comment?limit=5&offset=${(page-1) * 5}`)
+            $.get(URL + `/api/comment?limit=5&offset=${(page-1) * 5}`)
                 .done(response => dispatch({
                     type: LOAD_COMMENTS_FOR_PAGE + SUCCESS,
                     payload: { page } ,

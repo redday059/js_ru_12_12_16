@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import store from '../store'
 import { Provider } from 'react-redux'
+import {Link} from 'react-router'
 import Menu from '../components/menu/Menu'
 import MenuItem from '../components/menu/MenuItem'
 import dictionaries from '../dictionaries'
@@ -38,7 +39,11 @@ class App extends Component {
                         <div className="container">
                             <div className="row">
                                 <Switcher items = {['nl', 'en']} onChange={this.changeLanguage} active={this.state.language}/>
-                                <h1 className="col-xs-20 pull-left title"><LocalizedText text="News App"/></h1>
+                                <h1 className="col-xs-20 pull-left title">
+                                    <Link to={'/'} className="header__link">
+                                        <LocalizedText text="News App"/>
+                                    </Link>
+                                </h1>
                             </div>
                         </div>
                     </div>
