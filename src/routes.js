@@ -11,9 +11,12 @@ import CommentsRoot from './RouteHandlers/CommentsRt'
 import CommentsPageRoute from './RouteHandlers/CommentsPage'
 import ArticleIndexPage from './RouteHandlers/ArticleIndexPage'
 import ErrorPage from './RouteHandlers/ErrorPage'
+// TODO: add appropriate routing for production
+// import { PATH_PREFIX } from './constants'
 
 export default (
     <Router history={history}>
+        {/*<Route path='/react/' component={App}>*/}
         <Route path='/' component={App}>
             <IndexRedirect to='articles'/>
             <Redirect from='article' to='articles'/>

@@ -37,7 +37,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'build'),
         filename: 'bundle.js',
-        publicPath: 'static/'
+        publicPath: PRODUCTION ? '' : 'static/'
     },
     devServer: {
         proxy: [{

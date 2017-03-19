@@ -9,7 +9,7 @@ class MenuItem extends Component {
 
     render() {
         const { path, name } = this.props;
-        let linkName = name|| path.replace(/[\/]/g,'');
+        let linkName = name || path.replace(/[\/]/g,'');
         let linkNameCap = linkName[0].toUpperCase() + linkName.slice(1);
 
         return (

@@ -15,3 +15,6 @@ export const FAIL = 'FAIL'
 
 export const LOAD_COMMENTS_FOR_PAGE = 'LOAD_COMMENTS_FOR_PAGE'
 export const URL = PRODUCTION ? 'http://app-c3466245-e685-444c-b34c-7c57a1d12a1a.cleverapps.io':''
+export const PATH_PREFIX = PRODUCTION ? '/' : '/'
+// TODO: add appropriate routing for production
+// export const PATH_PREFIX = PRODUCTION ? '/react/' : '/'
